@@ -14,4 +14,5 @@ class ProductPageLocators:
     ALERT_SUCCESS = (By.CSS_SELECTOR, ".alert-success .alertinner")
     MESSAGES = (By.CSS_SELECTOR, "#messages")
     PRICE_BASKET_MESSAGE = (By.CSS_SELECTOR, "#messages .alert-info .alertinner")
-    PRICE_PRODUCT = (By.CSS_SELECTOR, ".product_main .price_color")
+    PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main>h1")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
