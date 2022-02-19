@@ -19,10 +19,3 @@ def test_quest_should_see_login_link(browser):
     page = MainPage(browser, link)
     page.open()
     page.should_be_login_link()
-
-# def test_add_to_cart(browser):
-#     page = ProductPage(url="", browser)
-#     page.open()
-#     page.should_be_add_to_catr_button()
-#     page.app_product_to_cart()
-#     page.should_be_success_message()
