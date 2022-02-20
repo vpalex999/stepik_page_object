@@ -19,6 +19,14 @@ class ProductPage(BasePage):
             *ProductPageLocators.PRODUCT_PRICE).text
         return price
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.FIRST_SUCCES_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_be_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.FIRST_SUCCES_MESSAGE),\
+            "Succeess message is not disappeared"
+
     def should_be_add_product(self):
 
         product_name = self.get_product_name()
