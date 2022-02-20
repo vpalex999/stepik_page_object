@@ -27,18 +27,15 @@ class ProductPage(BasePage):
         self.should_be_message_to_add_product(product_name)
         self.should_be_price_basket_equal_to_price_product(product_price)
 
-    def should_be_message_box(self):
-        assert self.is_element_present(
-            *ProductPageLocators.MESSAGES), f"The messages are not present"
-
     def should_be_message_to_add_product(self, product_name: str) -> None:
-        self.should_be_message_box()
 
-        alerts = self.browser.find_elements(*ProductPageLocators.ALERT_SUCCESS)
-        alerts_success_text = [element.text.strip() for element in alerts]
+        expected_success_added_message = f"{product_name} has been added to your basket."
 
-        assert any([text.find(product_name) for text in alerts_success_text]), \
-            f"Not found product name '{product_name}' in alerts success: {alerts_success_text}"
+        success_added_message = self.browser.find_element(
+            *ProductPageLocators.FIRST_SUCCES_MESSAGE).text
+
+        assert success_added_message == expected_success_added_message, \
+            f"expected success message '{expected_success_added_message}' is not equal actual: '{success_added_message}'"
 
     def should_be_price_basket_equal_to_price_product(self, price):
         price_basket_message = self.browser.find_element(
