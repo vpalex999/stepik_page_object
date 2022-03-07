@@ -1,9 +1,18 @@
 import os
+import platform
 import pytest
 from selenium import webdriver
 
-GECKO_DRIVER_PATH = os.path.normpath(
-    'drivers/geckodriver-v0.30.0-win64/geckodriver.exe')
+
+def get_driver():
+    driver_path = {
+        "Win": os.path.normpath('drivers/geckodriver-v0.30.0-win64/geckodriver.exe'),
+        "Linux": os.path.normpath('drivers/geckodriver-v0.30.0-linux64/geckodriver'),
+    }
+
+    os_type = platform.system()
+    return driver_path[os_type]
+
 
 
 def pytest_addoption(parser):
@@ -28,7 +37,7 @@ def browser(request):
         fp.set_preference('intl.accept_languages', user_language)
         fp.update_preferences()
         browser = webdriver.Firefox(
-            executable_path=GECKO_DRIVER_PATH, firefox_profile=fp)
+            executable_path=get_driver(), firefox_profile=fp)
     else:
         raise pytest.UsageError('--browser_name should be chrome or firefox')
     yield browser
